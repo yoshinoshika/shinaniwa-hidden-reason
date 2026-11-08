@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#211923">
+<title>あなたが審神者になった、隠れた理由</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600&display=swap');
+:root{--ink:#29212b;--muted:#776b77;--paper:#fbf7f0;--paper2:#f3eadf;--wine:#673b53;--wine2:#8d5a70;--gold:#b28a4e;--line:#e6d9ca;--white:#fffdfa}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% 0%,#4c3448 0,#211923 60%);color:var(--ink);font-family:'Noto Sans JP',sans-serif;line-height:1.85}
+.wrap{width:min(900px,calc(100% - 32px));margin:0 auto;padding:42px 0 80px}
+.hero{color:#f8efe6;text-align:center;padding:28px 16px 42px;position:relative}
+.kicker{font-size:11px;letter-spacing:.34em;color:#d5b77f}
+h1{font-family:'Shippori Mincho',serif;font-size:clamp(29px,6vw,48px);font-weight:500;line-height:1.55;letter-spacing:.08em;margin:20px 0 12px}
+.hero p{color:#e0d3d8;font-size:13px;letter-spacing:.08em;margin:0}
+.ornament{display:flex;align-items:center;justify-content:center;gap:14px;color:#c5a36b;margin:22px 0}
+.ornament:before,.ornament:after{content:"";width:68px;height:1px;background:linear-gradient(90deg,transparent,#b28a4e)}
+.ornament:after{transform:scaleX(-1)}
+.panel{background:var(--paper);border:1px solid #d7c6b3;border-radius:5px;box-shadow:0 18px 50px #100b143d;overflow:hidden}
+.intro{padding:28px 34px 25px;text-align:center;border-bottom:1px solid var(--line)}
+.intro p{margin:5px auto;max-width:650px;font-family:'Shippori Mincho',serif;font-size:15px}
+.section{padding:28px 34px;border-bottom:1px solid var(--line)}
+.section-head{display:flex;align-items:center;gap:12px;margin:0 0 20px}
+.section-no{font-family:'Shippori Mincho',serif;color:var(--gold);font-size:25px}
+h2{font-family:'Shippori Mincho',serif;font-size:20px;font-weight:600;margin:0;letter-spacing:.05em}
+.section-note{font-size:12px;color:var(--muted);margin:-12px 0 18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.field input{width:100%;border:1px solid #d9cbbb;background:#fffdfa;border-radius:3px;padding:12px 13px;font:14px 'Noto Sans JP',sans-serif;color:var(--ink);outline:none}
+.field input:focus{border-color:var(--wine2);box-shadow:0 0 0 3px #8d5a7018}
+.field small{display:block;color:var(--muted);font-size:11px;margin-top:5px}
+.question{padding:23px 0;border-top:1px solid var(--line)}
+.question:first-of-type{border-top:0;padding-top:0}
+.qtitle{font-family:'Shippori Mincho',serif;font-size:16px;font-weight:600;margin:0 0 14px}
+.qnum{font-family:'Noto Sans JP',sans-serif;color:var(--gold);font-size:11px;letter-spacing:.15em;margin-right:8px}
+.options{display:grid;gap:8px}
+.option{display:flex;align-items:flex-start;gap:11px;padding:11px 13px;border:1px solid #e5d9cd;background:#fffdfa;border-radius:3px;cursor:pointer;transition:.18s}
+.option:hover{border-color:#b48b9d;background:#fff9fa}
+.option:has(input:checked){border-color:var(--wine);background:#f4eaf0;box-shadow:inset 3px 0 var(--wine)}
+.option input{accent-color:var(--wine);margin-top:5px;flex:none}
+.letter{font-family:'Shippori Mincho',serif;color:var(--wine);font-weight:600;min-width:18px}
+.option span:last-child{font-size:13px;line-height:1.7}
+.actions{text-align:center;padding:32px}
+button{border:0;background:var(--wine);color:#fff8f1;padding:15px 40px;font:500 14px 'Noto Sans JP',sans-serif;letter-spacing:.14em;cursor:pointer;border-radius:2px;box-shadow:0 5px 14px #673b5330}
+button:hover{background:#80536a}button:disabled{opacity:.55;cursor:wait}
+.notice{font-size:11px;color:var(--muted);margin-top:13px}
+#error{color:#a33b4c;text-align:center;font-size:13px;margin:0 25px 20px}
+#result{display:none;margin-top:26px;background:var(--paper);border:1px solid #d7c6b3;padding:30px 34px;box-shadow:0 18px 50px #100b143d}
+.result-kicker{text-align:center;color:var(--gold);font-size:11px;letter-spacing:.3em}
+.result-title{text-align:center;font:600 27px 'Shippori Mincho',serif;color:var(--wine);margin:8px 0 14px}
+.result-desc{max-width:680px;margin:0 auto 24px;font:16px/2 'Shippori Mincho',serif;text-align:center}
+.result-sub{border-top:1px solid var(--line);padding-top:20px;margin-top:20px}
+.result-sub h3{font:600 17px 'Shippori Mincho',serif;color:var(--wine);margin:0 0 9px}
+.result-sub p{font-size:13px;margin:5px 0}
+.chartline{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.chartbox{background:#f4ede4;padding:15px;border:1px solid var(--line)}
+.chartbox strong{display:block;font:600 14px 'Shippori Mincho',serif;color:var(--wine);margin-bottom:6px}
+.chartbox span{font-size:12px;color:#5d515d}
+footer{text-align:center;color:#c8b9c1;font-size:11px;margin-top:24px;letter-spacing:.06em}
+@media(max-width:620px){.wrap{padding-top:20px}.section{padding:23px 19px}.intro{padding:23px 19px}.grid,.chartline{grid-template-columns:1fr}.actions{padding:25px 15px}#result{padding:25px 19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+<div class="kicker">TOUKEN RANBU · SANIWA DIAGNOSIS</div>
+<h1>あなたが審神者になった、<br>隠れた理由</h1>
+<div class="ornament">✦</div>
+<p>あなたを本丸へ導いたものは、いったい何だったのか。</p>
+</header>
+<main>
+<form id="diagnosis" class="panel">
+<div class="intro">
+<p>八つの問いに答え、あなた自身の星と、本丸へ着任した日の星を重ねてみましょう。</p>
+<p>そこに浮かび上がるのは、あなたが審神者になった「隠れた理由」かもしれません。</p>
+</div>
+<section class="section">
+<div class="section-head"><span class="section-no">壱</span><h2>あなたが生まれたときの星</h2></div>
+<p class="section-note">出生時の情報を入力してください。時刻は母子手帳などの記録が分かる範囲で入力してください。</p>
+<div class="grid">
+<div class="field"><label for="birthDate">生年月日</label><input id="birthDate" type="date" required></div>
+<div class="field"><label for="birthTime">出生時刻</label><input id="birthTime" type="time" required></div>
+<div class="field" style="grid-column:1/-1"><label for="birthPlace">出生地</label><input id="birthPlace" type="text" placeholder="例：東京都新宿区、日本" required><small>市区町村・都道府県・国など、地名を入力してください。</small></div>
+</div>
+</section>
+<section class="section">
+<div class="section-head"><span class="section-no">弐</span><h2>本丸へ着任した日の星</h2></div>
+<p class="section-note">あなたが審神者として本丸に着任した日時と場所を入力してください。</p>
+<div class="grid">
+<div class="field"><label for="joinDate">着任日</label><input id="joinDate" type="date" required></div>
+<div class="field"><label for="joinTime">着任時刻</label><input id="joinTime" type="time" required></div>
+<div class="field" style="grid-column:1/-1"><label for="joinPlace">着任地</label><input id="joinPlace" type="text" placeholder="例：京都府京都市、日本" required><small>本丸の所在地として設定したい地名を入力してください。</small></div>
+</div>
+</section>
+<section class="section">
+<div class="section-head"><span class="section-no">参</span><h2>あなたについての八つの問い</h2></div>
+<p class="section-note">深く考えすぎず、今の自分に近いと感じるものを一つ選んでください。</p>
+<div id="questions"></div>
+</section>
+<div id="error" role="alert"></div>
+<div class="actions">
+<button id="submit" type="submit">あなたの診断結果を見る</button>
+<div class="notice">※占い・診断は創作上の娯楽としてお楽しみください。</div>
+</div>
+</form>
+<section id="result" aria-live="polite"></section>
+</main>
+<footer>✦ あなたと本丸を結ぶ、ひとつの物語 ✦</footer>
+</div>
+<script>
+const questions = [
+{q:"あなたは、初めての場所や未知の物事に対して、どのような反応をすることが多いですか？",a:["興味が湧き、まずは自分で確かめてみたくなる。","直感的に惹かれたら、あまり深く考えずに近づいてみる。","興味はあるものの、安全かどうかを慎重に見極める。","誰かと一緒なら、積極的に挑戦してみたい。","慣れた環境を好み、あまり自分から新しい場所には行かない。"]},
+{q:"誰かが困っているとき、あなたが取りやすい行動はどれですか？",a:["自分にできることがないか考え、積極的に動く。","まずは相手の話を聞き、気持ちに寄り添う。","状況を整理し、具体的な解決策を探す。","自分だけでは難しいと感じたら、誰かの力を借りる。","助けたいと思っても、どう関わればいいか分からず迷ってしまう。"]},
+{q:"あなたが人生において、特に大切にしたいと思うものは何ですか？",a:["自分自身の信念や、決して曲げたくない意志。","大切な人や、守りたいと思える存在。","自由に選択できることと、新しい可能性。","誰かとの約束や、積み重ねてきた絆。","安心して過ごせる場所や、穏やかな日常。"]},
+{q:"あなたが何かを決断するとき、最後の後押しになるものは何ですか？",a:["自分が本当にそうしたいと思えるかどうか。","誰かのためになるか、誰かを守れるかどうか。","今の自分を変えるきっかけになるかどうか。","信頼している人が背中を押してくれるかどうか。","その先に、自分の知らない世界や可能性があるかどうか。"]},
+{q:"これまでの人生で、特に印象に残っている出来事や出会いはどのようなものですか？",a:["思いがけない偶然から始まった、予想外の出会い。","誰かからかけられた言葉や、勧められたこと。","幼い頃から覚えている約束や、ずっと心に残っている出来事。","誰かに助けられたり、支えられたりした経験。","それまでの生活や考え方を、大きく変えることになった経験。"]},
+{q:"今の自分につながる大きな変化が起きたとき、そのきっかけはどのようなものが多かったですか？",a:["自分から興味を持ち、調べたり行動したりしたこと。","誰かとの出会いや、その人からの働きかけ。","予想もしなかった出来事や、偶然の巡り合わせ。","それまで抱えていた不満や悩みから抜け出したいと思ったこと。","自分の意思だけでは説明できない、不思議な縁や導きを感じたこと。"]},
+{q:"あなたが心から安心できるのは、どのようなときですか？",a:["自分の存在や努力を、誰かに認めてもらえたとき。","大切な人がそばにいて、何も心配せずに過ごせるとき。","自分の居場所があり、帰る場所を失わずにいられるとき。","誰かの役に立てている、自分にもできることがあると感じたとき。","しがらみから解放され、自分らしく自由にいられるとき。"]},
+{q:"あなたの心に長く残り続けるのは、どのような感情ですか？",a:["あのとき別の選択をしていたら、という後悔や未練。","誰かから受けた優しさや恩を、忘れたくないという気持ち。","いつか何かを成し遂げたい、今とは違う自分になりたいという願い。","大切なものを失いたくない、失わせたくないという強い思い。","理由は分からないけれど、何かを探しているような懐かしさや憧れ。"]}
+];
+const outcomes = [
+{title:"政府の広告に興味を惹かれて",desc:"あなたを本丸へ導いた最初の糸口は、目に留まった小さな知らせだったのかもしれません。知らない世界への好奇心と、自分の目で確かめたいという気持ち。その一歩が、思いがけない縁へとつながりました。"},
+{title:"刀剣男士に呼ばれて",desc:"風に混じる声、夢の中の気配、ふと耳に残った誰かの呼び声。あなた自身も気づかないうちに、向こう側から差し伸べられた縁を受け取っていたのかもしれません。"},
+{title:"珍しい動物を追いかけて",desc:"偶然見かけた小さな生き物。その姿を追いかけた先に、政府との出会いが待っていたのでしょう。好奇心と偶然が重なり、あなたの日常は静かに姿を変えました。"},
+{title:"幼い頃の約束を果たすため",desc:"ずっと心の奥に残っていた約束。忘れたつもりでも、あなたの選択のどこかにその言葉は息づいていたのでしょう。時を越えて、約束の続きを生きるために。"},
+{title:"何かを守るため",desc:"あなたの胸にあったのは、失いたくないものを守りたいという強い願い。誰かのため、あるいは大切な居場所のために、あなたは本丸へ向かう道を選んだのかもしれません。"},
+{title:"自分を変えたくて",desc:"今の自分のままではいられない。何かを変えたい、知らない自分に出会いたい。そんな思いが、あなたを新しい場所へと押し出しました。本丸は、変化の始まりだったのでしょう。"},
+{title:"刀剣男士に救われて",desc:"かつて受け取った優しさや救い。その記憶が、あなたと刀剣男士を結ぶ大切な糸になっているのかもしれません。今度はあなたが誰かを支える側になるために。"},
+{title:"身近な誰かに勧められて",desc:"何気ない会話や、信頼する人からのひと言。自分ひとりなら選ばなかった道も、誰かの勧めがあったからこそ開けたのでしょう。人との縁が、あなたを本丸へ導きました。"},
+{title:"今いる場所から逃れたくて",desc:"ここではないどこかへ行きたい。今の環境から離れ、新しい場所でやり直したい。そんな切実な思いが、あなたに本丸という居場所を見つけさせたのかもしれません。"},
+{title:"知らないうちに導かれて",desc:"理由をひとつに定めることはできない、不思議な巡り合わせ。自分で選んだと思っていた道も、振り返ればずっと前から続いていた縁に導かれていたのかもしれません。"}
+];
+// 各回答が示す動機への寄与。質問の回答を主軸に、出生図・着任図の簡易占星術情報を補助的に添える。
+const scoreMap = [
+[[0,1],[9,1],[4,1],[7,1],[8,1]],
+[[4,2],[6,2],[0,1],[7,2],[8,1]],
+[[5,2],[4,2],[2,2],[3,2],[8,1]],
+[[5,2],[4,2],[5,1],[7,2],[2,2]],
+[[9,2],[7,2],[3,2],[6,2],[5,2]],
+[[0,1],[7,1],[2,2],[8,2],[9,2]],
+[[5,1],[6,2],[3,1],[4,2],[8,1]],
+[[8,2],[6,2],[5,2],[4,2],[9,2]]
+];
+const root=document.getElementById('questions');
+questions.forEach((q,i)=>{
+ const box=document.createElement('div');box.className='question';
+ const title=document.createElement('p');title.className='qtitle';title.innerHTML='<span class="qnum">Q'+(i+1)+'</span>'+q.q;box.appendChild(title);
+ const opts=document.createElement('div');opts.className='options';
+ q.a.forEach((a,j)=>{
+  const label=document.createElement('label');label.className='option';
+  label.innerHTML='<input type="radio" name="q'+i+'" value="'+j+'" required><span class="letter">'+String.fromCharCode(65+j)+'.</span><span></span>';
+  label.querySelector('span:last-child').textContent=a;opts.appendChild(label);
+ });
+ box.appendChild(opts);root.appendChild(box);
+});
+const signs=['牡羊座','牡牛座','双子座','蟹座','獅子座','乙女座','天秤座','蠍座','射手座','山羊座','水瓶座','魚座'];
+const signRanges=[[3,21],[4,20],[5,21],[6,22],[7,23],[8,23],[9,23],[10,23],[11,22],[12,22],[1,20],[2,19]];
+function sunSign(dateStr){
+ const d=new Date(dateStr+'T12:00:00');const m=d.getMonth()+1,day=d.getDate();
+ let idx;
+ for(let i=0;i<12;i++){const [sm,sd]=signRanges[i], [em,ed]=signRanges[(i+1)%12];if((m===sm&&day>=sd)||(m===em&&day<ed)){idx=i;break;}}
+ return signs[idx??0];
+}
+function julian(date){return date.getTime()/86400000+2440587.5}
+function ascendant(date,lat,lon){
+ const jd=julian(date),T=(jd-2451545)/36525;
+ let gmst=280.46061837+360.98564736629*(jd-2451545)+0.000387933*T*T-T*T*T/38710000;
+ const theta=((gmst+lon)%360+360)%360*Math.PI/180,phi=lat*Math.PI/180,eps=23.439291*Math.PI/180;
+ let deg=Math.atan2(Math.cos(theta),-(Math.sin(theta)*Math.cos(eps)+Math.tan(phi)*Math.sin(eps)))*180/Math.PI;
+ return (deg+360)%360;
+}
+function signAt(deg){return signs[Math.floor(((deg%360)+360)%360/30)]}
+function localDate(dateStr,timeStr){return new Date(dateStr+'T'+timeStr+':00')}
+async function geocode(place){
+ const url='https://nominatim.openstreetmap.org/search?format=json&limit=1&q='+encodeURIComponent(place);
+ const res=await fetch(url,{headers:{'Accept-Language':'ja'}});
+ if(!res.ok)throw new Error('地名を検索できませんでした。');
+ const data=await res.json();if(!data.length)throw new Error('「'+place+'」の場所を特定できませんでした。地名をもう少し詳しく入力してください。');
+ return {lat:Number(data[0].lat),lon:Number(data[0].lon),label:data[0].display_name};
+}
+function houseText(ascDeg,sun){
+ const rising=Math.floor(ascDeg/30),planet=Math.floor(signs.indexOf(sun));
+ const house=((planet-rising+12)%12)+1;
+ return '太陽は第'+house+'ハウス（ホールサイン方式）';
+}
+document.getElementById('diagnosis').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const error=document.getElementById('error'),btn=document.getElementById('submit'),result=document.getElementById('result');
+ error.textContent='';btn.disabled=true;btn.textContent='星の配置を読み解いています…';
+ try{
+  const vals=questions.map((_,i)=>{const el=document.querySelector('input[name="q'+i+'"]:checked');return el?Number(el.value):-1});
+  if(vals.some(v=>v<0))throw new Error('Q1〜Q8すべてに回答してください。');
+  const birthPlace=document.getElementById('birthPlace').value.trim(),joinPlace=document.getElementById('joinPlace').value.trim();
+  const [bp,jp]=await Promise.all([geocode(birthPlace),geocode(joinPlace)]);
+  const bDate=document.getElementById('birthDate').value,bTime=document.getElementById('birthTime').value;
+  const jDate=document.getElementById('joinDate').value,jTime=document.getElementById('joinTime').value;
+  const bSun=sunSign(bDate),jSun=sunSign(jDate);
+  const bAsc=ascendant(localDate(bDate,bTime),bp.lat,bp.lon),jAsc=ascendant(localDate(jDate,jTime),jp.lat,jp.lon);
+  const scores=Array(10).fill(0);
+  vals.forEach((v,i)=>{const [id,weight]=scoreMap[i][v];scores[id]+=weight});
+  // 出生図・着任図の太陽星座とASCの象徴を、質問結果への小さな補正として使用。
+  const astroAffinity = [2,9,5,3,4,5,6,7,8,1,0,9];
+  [bSun,jSun,signAt(bAsc),signAt(jAsc)].forEach((s,k)=>{const idx=signs.indexOf(s);scores[astroAffinity[idx]]+=k<2?0.25:0.35});
+  const ranked=scores.map((score,id)=>({score,id})).sort((a,b)=>b.score-a.score);
+  const top=ranked[0],second=ranked[1],o=outcomes[top.id];
+  const bHouse=houseText(bAsc,bSun),jHouse=houseText(jAsc,jSun);
+  result.innerHTML='<div class="result-kicker">YOUR HIDDEN REASON</div><div class="result-title"></div><p class="result-desc"></p><div class="result-sub"><h3>あなたを導いたもの</h3><p></p></div><div class="result-sub"><h3>星から見る、あなたと本丸の縁</h3><div class="chartline"><div class="chartbox"><strong>あなたが生まれた日の星</strong><span></span></div><div class="chartbox"><strong>本丸へ着任した日の星</strong><span></span></div></div><p style="font-size:11px;color:#776b77;margin-top:12px">※太陽星座とASCを用いた簡易的な読み解きです。ハウスはホールサイン方式。入力時刻はご利用端末のタイムゾーンとして計算しています。</p></div><div class="result-sub"><h3>もうひとつの可能性</h3><p></p></div>';
+  result.querySelector('.result-title').textContent=o.title;
+  result.querySelector('.result-desc').textContent=o.desc;
+  result.querySelector('.result-sub p').textContent='質問への回答からは「'+o.title+'」という動機が最も強く表れました。次点には「'+outcomes[second.id].title+'」の気配もあります。';
+  result.querySelectorAll('.chartbox span')[0].textContent='太陽：'+bSun+' ／ ASC：約'+signAt(bAsc)+' ／ '+bHouse+'。出生地：'+birthPlace;
+  result.querySelectorAll('.chartbox span')[1].textContent='太陽：'+jSun+' ／ ASC：約'+signAt(jAsc)+' ／ '+jHouse+'。着任地：'+joinPlace;
+  result.querySelectorAll('.result-sub p')[1].textContent='「'+outcomes[second.id].title+'」という別の縁も、あなたの中に残っているようです。';
+  result.style.display='block';result.scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(err){error.textContent=err.message||'診断中にエラーが発生しました。入力内容をご確認ください。'}
+ finally{btn.disabled=false;btn.textContent='あなたの診断結果を見る'}
+});
+</script>
+</body>
+</html>

@@ -198,7 +198,7 @@ document.getElementById('diagnosis').addEventListener('submit',async e=>{
   const bSun=sunSign(bDate),jSun=sunSign(jDate);
   const bAsc=ascendant(localDate(bDate,bTime),bp.lat,bp.lon),jAsc=ascendant(localDate(jDate,jTime),jp.lat,jp.lon);
   const scores=Array(10).fill(0);
-  resultAnswerMap.forEach((pairs,id)=>pairs.forEach(([qi,answer])=>{if(vals[qi]===answer)scores[id]+=1;}));
+  scoreMap.forEach((answers,qi)=>{const [outcomeId,weight]=answers[vals[qi]];scores[outcomeId]+=weight;});
   // 出生図・着任図の太陽星座とASCの象徴を、質問結果への小さな補正として使用。
   const astroAffinity = [2,9,5,3,4,5,6,7,8,1,0,9];
   [bSun,jSun,signAt(bAsc),signAt(jAsc)].forEach((s,k)=>{const idx=signs.indexOf(s);scores[astroAffinity[idx]]+=k<2?0.25:0.35});
